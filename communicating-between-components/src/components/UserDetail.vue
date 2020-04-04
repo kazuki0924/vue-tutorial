@@ -9,8 +9,9 @@
 <script>
 export default {
   props: {
-    myName: String,
-    required: true
+    myName: {
+      type: String
+    }
   },
   methods: {
     switchName() {
