@@ -22,8 +22,8 @@ export default {
     'app-header': Header,
     'app-servers': Servers,
     'app-server-details': ServerDetails,
-    'app-footer': Footer
-  }
+    'app-footer': Footer,
+  },
 };
 </script>
 
