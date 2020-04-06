@@ -13,8 +13,9 @@
           Load Red Template
         </button>
         <hr />
-        <p>{{ selectedComponent }}</p>
-        <component :is="selectedComponent"></component>
+        <component :is="selectedComponent">
+          <p>{{ selectedComponent }}</p>
+        </component>
       </div>
     </div>
   </div>
@@ -27,7 +28,7 @@ import Red from './components/Red.vue';
 
 export default {
   data: function () {
-    return { selectedComponent: '' };
+    return { selectedComponent: null };
   },
   components: {
     appBlue: Blue,
