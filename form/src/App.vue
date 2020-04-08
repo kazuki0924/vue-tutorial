@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <form>
-      <div class="row">
+      <div class="row" v-if="!isSubmitted">
         <div
           class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3"
         >
@@ -21,10 +21,27 @@
             <label for="last-name">Last Name</label>
             <input type="text" id="last-name" v-model="userData.lastName" />
           </div>
-          <!-- <p>{{ userData.firstName + ' ' + userData.lastName }}</p> -->
+          <div>
+            <label for="email">Mail</label>
+            <input type="email" id="email" v-model="userData.email" />
+          </div>
           <div>
             <label for="password">Password</label>
             <input type="password" id="password" v-model="userData.password" />
+          </div>
+          <div>
+            <label for="store-data">Store Data?</label>
+            <label for="Yes">
+              <input type="radio" id="yes" value="Yes" v-model="storeData" />
+              Yes
+            </label>
+            <label for="No">
+              <input type="radio" id="no" value="No" v-model="storeData" />
+              No
+            </label>
+            <div>
+              <button @click="submitted">Submit</button>
+            </div>
           </div>
           <!-- Exercise 2 -->
           <!-- Only display the Form if it has NOT been submitted -->
@@ -37,7 +54,7 @@
       </div>
     </form>
     <hr />
-    <div class="row">
+    <div class="row" v-if="isSubmitted">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -45,9 +62,9 @@
           </div>
           <div class="panel-body">
             <p>Full Name:</p>
-            <p>Mail:</p>
-            <p>Password:</p>
-            <p>Store in Database?:</p>
+            <p>Mail: {{ userData.email }}</p>
+            <p>Password: {{ userData.password }}</p>
+            <p>Store in Database?: {{ storeData }}</p>
           </div>
         </div>
       </div>
@@ -62,10 +79,17 @@ export default {
       userData: {
         firstName: '',
         lastName: '',
+        email: '',
         password: '',
       },
-      storeData: true,
+      storeData: '',
+      isSubmitted: false,
     };
+  },
+  methods: {
+    submitted() {
+      this.isSubmitted = true;
+    },
   },
 };
 </script>
