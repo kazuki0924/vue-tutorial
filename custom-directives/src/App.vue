@@ -8,6 +8,12 @@
         <button v-custom:click="clicked" class="btn btn-primary">
           Click Me
         </button>
+        <hr />
+        <div
+          style="width: 100px; height: 100px; background-color: lightgreen;"
+          v-custom:mouseenter="mouseEnter"
+          v-custom:mouseleave="mouseLeft"
+        ></div>
       </div>
     </div>
   </div>
@@ -28,13 +34,19 @@ export default {
         // };
         const type = binding.arg;
         const fn = binding.value;
-        el.addEventListener(type, fn());
+        el.addEventListener(type, fn);
       },
     },
   },
   methods: {
     clicked() {
       alert('I was clicked!');
+    },
+    mouseEnter() {
+      console.log('Mouse entered');
+    },
+    mouseLeft() {
+      console.log('Mouse left');
     },
   },
 };
