@@ -29,8 +29,22 @@ export default {
           delay = 3000;
         }
         if (binding.modifiers['blink']) {
-          let mainColor = 'green';
+          let mainColor = binding.value;
           let secondColor = 'blue';
+          let currentColor = mainColor;
+          setTimeout(() => {
+            setInterval(() => {
+              currentColor == secondColor
+                ? (currentColor = mainColor)
+                : (currentColor = secondColor);
+
+              if (binding.arg == 'background') {
+                el.style.backgroundColor = currentColor;
+              } else {
+                el.style.color = currentColor;
+              }
+            }, 1000);
+          }, delay);
         } else {
           setTimeout(() => {
             if (binding.arg == 'background') {
