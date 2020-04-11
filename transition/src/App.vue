@@ -8,7 +8,7 @@
           Show Alert
         </button>
         <br /><br />
-        <transition name="fade">
+        <transition name="slide">
           <div class="alert alert-info" v-if="show">This is some Info</div>
         </transition>
       </div>
@@ -28,14 +28,47 @@
 
 <style>
   .fade-enter {
+    opacity: 0;
   }
 
   .fade-enter-active {
+    transition: opacity 1s;
   }
 
-  .fade-leave {
-  }
+  /* .fade-leave {
+  } */
 
   .fade-leave-active {
+    transition: opacity 1s;
+    opacity: 0;
+  }
+
+  /* .slide-enter {
+  } */
+
+  .slide-enter-active {
+    animation: slide-in;
+  }
+  .slide-leave {
+  }
+  .slide-leave-active {
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(20px);
+    }
+    to {
+      transform: translate(0);
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translate(0);
+    }
+    to {
+      transform: translateY(20px);
+    }
   }
 </style>
