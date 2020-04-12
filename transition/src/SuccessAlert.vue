@@ -1,3 +1,3 @@
 <template>
-  <div class="alert alert-sucess">This is successful!</div>
+  <div class="alert alert-success">This is successful!</div>
 </template>
