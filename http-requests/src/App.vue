@@ -33,25 +33,38 @@
           email: '',
         },
         users: [],
+        resource: {},
       };
     },
     methods: {
       submit() {
-        this.$http
-          .post(
-            'https://vuejs-http-april-thirteen-2020.firebaseio.com/data.json',
-            this.user
-          )
-          .then(
-            (response) => {
-              console.log(response);
-            },
-            (error) => {
-              console.log(error);
-            }
-          );
+        // this.$http.post('data.json', this.user).then(
+        //   (response) => {
+        //     console.log(response);
+        //   },
+        //   (error) => {
+        //     console.log(error);
+        //   }
+        // );
+        this.resource.save({}, this.user);
       },
-      fetchData() {},
+      fetchData() {
+        this.$http
+          .get('data.json', this.user)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            const resultArray = [];
+            for (let key in data) {
+              resultArray.push(data[key]);
+            }
+            this.users = resultArray;
+          });
+      },
+    },
+    created() {
+      this.resource = this.$resource('data.json');
     },
   };
 </script>
