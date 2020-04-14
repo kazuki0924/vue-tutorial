@@ -13,7 +13,10 @@
         </div>
         <button class="btn btn-primary" @click="submit">Submit</button>
         <hr />
+        <input type="text" class="form-control" v-model="node" />
+        <br /><br />
         <button class="btn btn-primary" @click="fetchData">Get Data</button>
+        <br /><br />
         <ul class="list-group">
           <li class="list-group-item" v-for="u in users" :key="u">
             {{ u.username }} - {{ u.email }}
@@ -34,6 +37,7 @@
         },
         users: [],
         resource: {},
+        node: 'data',
       };
     },
     methods: {
@@ -46,11 +50,24 @@
         //     console.log(error);
         //   }
         // );
-        this.resource.save({}, this.user);
+        // this.resource.save({}, this.user);
+        this.resource.saveAlt(this.user);
       },
       fetchData() {
-        this.$http
-          .get('data.json', this.user)
+        // this.$http
+        //   .get('data.json', this.user)
+        //   .then((response) => {
+        //     return response.json();
+        //   })
+        //   .then((data) => {
+        //     const resultArray = [];
+        //     for (let key in data) {
+        //       resultArray.push(data[key]);
+        //     }
+        //     this.users = resultArray;
+        //   });
+        this.resource
+          .getData({node: this.node})
           .then((response) => {
             return response.json();
           })
@@ -64,7 +81,11 @@
       },
     },
     created() {
-      this.resource = this.$resource('data.json');
+      const customActions = {
+        saveAlt: {method: 'POST', url: 'alternative.json'},
+        getData: {method: 'GET'},
+      };
+      this.resource = this.$resource('{node}.json', {}, customActions);
     },
   };
 </script>
