@@ -12,6 +12,13 @@
           <input class="form-control" type="text" v-model="user.email" />
         </div>
         <button class="btn btn-primary" @click="submit">Submit</button>
+        <hr />
+        <button class="btn btn-primary" @click="fetchData">Get Data</button>
+        <ul class="list-group">
+          <li class="list-group-item" v-for="u in users" :key="u">
+            {{ u.username }} - {{ u.email }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -25,12 +32,26 @@
           username: '',
           email: '',
         },
+        users: [],
       };
     },
     methods: {
       submit() {
-        console.log(this.user);
+        this.$http
+          .post(
+            'https://vuejs-http-april-thirteen-2020.firebaseio.com/data.json',
+            this.user
+          )
+          .then(
+            (response) => {
+              console.log(response);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       },
+      fetchData() {},
     },
   };
 </script>
