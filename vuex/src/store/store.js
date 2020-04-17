@@ -24,7 +24,7 @@ export const store = new Vuex.Store({
     },
   },
   actions: {
-    increment: ({commit}) => {
+    increment: ({commit}, payload) => {
       commit('increment');
     },
     decrement: ({commit}) => {
