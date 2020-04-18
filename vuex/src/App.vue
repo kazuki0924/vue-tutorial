@@ -7,7 +7,6 @@
         <app-another-result></app-another-result>
         <hr />
         <app-counter></app-counter>
-        <br />
         <app-another-counter></app-another-counter>
         <hr />
         <input type="text" v-model="value" />
@@ -22,21 +21,22 @@
   import AnotherCounter from './components/AnotherCounter.vue';
   import Result from './components/Result.vue';
   import AnotherResult from './components/AnotherResult.vue';
+  import * as types from './store/types';
 
   export default {
     computed: {
       value: {
         get() {
-          return this.$store.getters.value;
+          return this.$store.getters[types.VALUE];
         },
         set(value) {
-          this.$store.dispatch('updateValue', value);
+          this.$store.dispatch(types.UPDATE_VALUE, value);
         },
       },
     },
     methods: {
       updateValue(event) {
-        this.$store.dispatch('updateValue', event.target.value);
+        this.$store.dispatch(types.UPDATE_VALUE, event.target.value);
       },
     },
     components: {
